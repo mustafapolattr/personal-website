@@ -12,7 +12,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#">My Portfolio</a>
+            <a class="navbar-brand" href="#" data-lang="nav-brand">Hello There 🌍</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -49,7 +49,9 @@
                 <p data-lang="about-text">
                     I am a <strong>problem solver, a builder, and a technology enthusiast</strong> who believes that software is not just about lines of code, but about shaping the way we interact with the world. 
                 </p>
-                <a href="resume.pdf" class="btn btn-primary mt-3" target="_blank" data-lang="resume-button">Download My Resume</a>
+                <a href="resume.pdf" class="btn btn-primary mt-3" target="_blank" download>
+                    <i class="fas fa-file-pdf"></i> Download My Resume
+                </a>
             </div>
         </div>
     </section>
@@ -59,14 +61,14 @@
         <h2 data-lang="contact-title">Contact Me</h2>
         <form>
             <label for="name" class="form-label" data-lang="contact-name">Your Name:</label>
-            <input type="text" id="name" class="form-control" placeholder="Enter your name">
-
+            <input type="text" id="name" class="form-control" placeholder="" data-placeholder="contact-placeholder-name">
+    
             <label for="email" class="form-label" data-lang="contact-email">Your Email:</label>
-            <input type="email" id="email" class="form-control" placeholder="Enter your email">
-
+            <input type="email" id="email" class="form-control" placeholder="" data-placeholder="contact-placeholder-email">
+    
             <label for="message" class="form-label" data-lang="contact-message">Your Message:</label>
-            <textarea id="message" class="form-control" placeholder="Write your message..."></textarea>
-
+            <textarea id="message" class="form-control" placeholder="" data-placeholder="contact-placeholder-message"></textarea>
+    
             <button type="submit" class="btn btn-primary mt-3" data-lang="contact-button">Send</button>
         </form>
     </section>

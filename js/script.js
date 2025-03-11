@@ -2,7 +2,7 @@
 const translations = {
     "en": {
         "title": "Personal Website",
-        "nav-brand": "My Portfolio",
+        "nav-brand": "Hello There 🌍",
         "nav-about": "About",
         "nav-projects": "Projects",
         "nav-contact": "Contact",
@@ -15,11 +15,14 @@ const translations = {
         "contact-name": "Your Name:",
         "contact-email": "Your Email:",
         "contact-message": "Your Message:",
-        "contact-button": "Send"
+        "contact-button": "Send",
+        "contact-placeholder-name": "Enter your name",
+        "contact-placeholder-email": "Enter your email",
+        "contact-placeholder-message": "Write your message"
     },
     "tr": {
         "title": "Kişisel Web Sitesi",
-        "nav-brand": "Portföyüm",
+        "nav-brand": "Merhabalar Hoşgeldiniz 🌍",
         "nav-about": "Hakkımda",
         "nav-projects": "Projeler",
         "nav-contact": "İletişim",
@@ -32,7 +35,10 @@ const translations = {
         "contact-name": "Adınız:",
         "contact-email": "E-posta Adresiniz:",
         "contact-message": "Mesajınız:",
-        "contact-button": "Gönder"
+        "contact-button": "Gönder",
+        "contact-placeholder-name": "Adınızı girin",
+        "contact-placeholder-email": "E-posta adresinizi girin",
+        "contact-placeholder-message": "Mesajınızı yazın..."
     }
 };
 
@@ -45,6 +51,14 @@ function changeLanguage(lang) {
         }
     });
 
+    // Update placeholders
+    document.querySelectorAll("[data-placeholder]").forEach(element => {
+        let key = element.getAttribute("data-placeholder");
+        if (translations[lang][key]) {
+            element.setAttribute("placeholder", translations[lang][key]);
+        }
+    });
+
     // Store selected language in localStorage
     localStorage.setItem("selectedLanguage", lang);
 }
@@ -54,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedLanguage = localStorage.getItem("selectedLanguage") || "en"; // Default English
     changeLanguage(savedLanguage);
 });
-
 
 // Function to update active navbar link
 function updateActiveNavLink(event) {
