@@ -71,3 +71,21 @@
         margin: 5px 0;
     }
 }
+
+.btn-primary {
+    background: linear-gradient(to right, #007bff, #6610f2);
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 12px 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary i {
+    margin-right: 8px;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, #6610f2, #007bff);
+    transform: scale(1.05);
+}
