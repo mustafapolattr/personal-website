@@ -133,16 +133,60 @@
     color: white;
 }
 
-.dark-mode .navbar {
-    background: #1e1e1e !important;
-}
-
-.dark-mode input, .dark-mode textarea {
-    background: #333;
+/* Dark Mode Input Fields */
+.dark-mode input, 
+.dark-mode textarea {
+    background: #1e1e1e; /* Slightly lighter dark for better contrast */
     color: white;
-    border: 1px solid #555;
+    border: 2px solid #666; /* Keep border width consistent */
 }
 
-.dark-mode .btn-primary {
-    background: linear-gradient(to right, #6610f2, #007bff);
+/* Placeholder text visibility */
+.dark-mode input::placeholder, 
+.dark-mode textarea::placeholder {
+    color: #bbb;
+    opacity: 1;
+}
+
+/* Focus state for better usability */
+input:focus, textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Smooth transition for dark mode */
+body {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Prevent content shifting when switching modes */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Fix scrollbar shifting issue */
+html {
+    scrollbar-gutter: stable;
+}
+
+/* Prevent navbar height change */
+.navbar {
+    transition: background-color 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+/* Prevent input/textarea size change during Dark Mode transition */
+input, textarea {
+    min-height: 40px; /* Prevents height change */
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    box-sizing: border-box; /* Prevents width change */
+}
+
+/* Prevent buttons from slightly moving */
+.btn {
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }

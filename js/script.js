@@ -80,7 +80,11 @@ function changeLanguage(lang) {
     document.querySelectorAll("[data-lang]").forEach(element => {
         let key = element.getAttribute("data-lang");
         if (translations[lang][key]) {
-            element.innerText = translations[lang][key];
+            if (element.tagName === "SPAN") {
+                element.innerText = translations[lang][key]; // Handle span inside buttons/links
+            } else {
+                element.innerText = translations[lang][key];
+            }
         }
     });
 
@@ -99,7 +103,17 @@ document.getElementById("dark-mode-toggle").addEventListener("click", function()
     document.body.classList.toggle("dark-mode");
     let mode = document.body.classList.contains("dark-mode") ? "dark" : "light";
     localStorage.setItem("theme", mode);
-    this.innerText = mode === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode";
+    this.innerText = mode === "dark" ? "☀️" : "🌙";
+});
+
+// Check user preference on page load
+document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("dark-mode-toggle").innerText = "☀️";
+    } else {
+        document.getElementById("dark-mode-toggle").innerText = "🌙";
+    }
 });
 
 // Function to trigger fade-in animation when elements are in viewport
