@@ -1,0 +1,43 @@
+# Node.js & NPM related files (if used in the project)
+node_modules/
+package-lock.json
+npm-debug.log
+yarn-error.log
+
+# VS Code settings (local settings, optional to ignore)
+.vscode/
+
+# MacOS & Windows system files (unnecessary)
+.DS_Store
+Thumbs.db
+
+# Compiled files and temporary files
+*.log
+*.tmp
+*.swp
+
+# Cache and temporary build directories
+.cache/
+dist/
+out/
+temp/
+
+# Resume or large media files (optional)
+resume.pdf
+*.zip
+*.rar
+
+# Python Virtual Environment (if using Python in future)
+venv/
+__pycache__/
+
+# ASP.NET & C# build files (if backend is added)
+bin/
+obj/
+*.pdb
+
+# Ignore environment files (if using API keys or sensitive info)
+.env
+.env.local
+.env.production
+.env.development
