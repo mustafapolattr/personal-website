@@ -89,3 +89,60 @@
     background: linear-gradient(to right, #6610f2, #007bff);
     transform: scale(1.05);
 }
+
+/* General animation */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Button hover effect */
+.btn-primary {
+    background: linear-gradient(to right, #007bff, #6610f2);
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 12px 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, #6610f2, #007bff);
+    transform: scale(1.05);
+}
+
+/* Navbar link hover effect */
+.navbar-nav .nav-link {
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode .navbar {
+    background: #1e1e1e !important;
+}
+
+.dark-mode input, .dark-mode textarea {
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+}
+
+.dark-mode .btn-primary {
+    background: linear-gradient(to right, #6610f2, #007bff);
+}

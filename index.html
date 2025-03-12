@@ -30,13 +30,16 @@
                             <li><a class="dropdown-item" href="#" onclick="changeLanguage('tr')">Türkçe</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <button id="dark-mode-toggle" class="btn btn-outline-light">🌙 Dark Mode</button>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- About Me Section -->
-    <section id="about" class="container mt-5 text-center">
+    <section id="about" class="container mt-5 text-center fade-in">
         <div class="row align-items-center">
             <div class="col-md-4">
                 <img src="images/profile.jpg" alt="Profile Picture" class="img-fluid rounded-circle shadow-lg" width="250">
@@ -56,8 +59,13 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
+    <section id="projects" class="container mt-5 fade-in">
+        <h2 data-lang="nav-projects">Projects</h2>
+    </section>
+
     <!-- Contact Form -->
-    <section id="contact" class="container mt-5">
+    <section id="contact" class="container mt-5 fade-in">
         <h2 data-lang="contact-title">Contact Me</h2>
         <form>
             <label for="name" class="form-label" data-lang="contact-name">Your Name:</label>

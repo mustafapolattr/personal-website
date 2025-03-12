@@ -67,19 +67,50 @@ function changeLanguage(lang) {
 document.addEventListener("DOMContentLoaded", () => {
     const savedLanguage = localStorage.getItem("selectedLanguage") || "en"; // Default English
     changeLanguage(savedLanguage);
+
+    // Apply dark mode if saved
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("dark-mode-toggle").innerText = "☀️ Light Mode";
+    }
 });
 
-// Function to update active navbar link
-function updateActiveNavLink(event) {
-    let navLinks = document.querySelectorAll(".navbar-nav .nav-link");
-    navLinks.forEach(link => link.classList.remove("active"));
-    event.target.classList.add("active");
+// Function to change language dynamically
+function changeLanguage(lang) {
+    document.querySelectorAll("[data-lang]").forEach(element => {
+        let key = element.getAttribute("data-lang");
+        if (translations[lang][key]) {
+            element.innerText = translations[lang][key];
+        }
+    });
+
+    document.querySelectorAll("[data-placeholder]").forEach(element => {
+        let key = element.getAttribute("data-placeholder");
+        if (translations[lang][key]) {
+            element.setAttribute("placeholder", translations[lang][key]);
+        }
+    });
+
+    localStorage.setItem("selectedLanguage", lang);
 }
 
-// Call function on page load
-document.addEventListener("DOMContentLoaded", updateActiveNavLink);
-
-// Call function when user clicks a navbar link
-document.querySelectorAll(".navbar-nav .nav-link").forEach(link => {
-    link.addEventListener("click", updateActiveNavLink);
+// Function to toggle dark mode
+document.getElementById("dark-mode-toggle").addEventListener("click", function() {
+    document.body.classList.toggle("dark-mode");
+    let mode = document.body.classList.contains("dark-mode") ? "dark" : "light";
+    localStorage.setItem("theme", mode);
+    this.innerText = mode === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode";
 });
+
+// Function to trigger fade-in animation when elements are in viewport
+function revealOnScroll() {
+    let elements = document.querySelectorAll(".fade-in");
+    elements.forEach(element => {
+        if (element.getBoundingClientRect().top < window.innerHeight - 100) {
+            element.classList.add("show");
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", revealOnScroll);
+window.addEventListener("scroll", revealOnScroll);
