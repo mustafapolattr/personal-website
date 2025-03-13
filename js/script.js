@@ -4,7 +4,6 @@ const translations = {
         "title": "Personal Website",
         "nav-brand": "Hello There 🌍",
         "nav-about": "About",
-        "nav-projects": "Projects",
         "nav-contact": "Contact",
         "lang-text": "Language",
         "about-title": "About Me",
@@ -30,13 +29,20 @@ const translations = {
         "timeline-title-5": "2022",
         "timeline-text-5": "Starting your career as a back-end software developer (Java - Python)",
         "timeline-title-6": "2025 - Future Goals",
-        "timeline-text-6": "Focusing on innovation, following technology closely and sailing to future horizons with artificial intelligence."
+        "timeline-text-6": "Focusing on innovation, following technology closely and sailing to future horizons with artificial intelligence.",
+        "game-title": "Test Your Reflexes!",
+        "game-desc": "Click as soon as the color changes!",
+        "game-start": "Start Game",
+        "game-wait": "Wait for the color change...",
+        "game-click": "CLICK NOW!",
+        "game-result": "Your reaction time: ",
+        "game-restart": "Click Start to play again!",
+        "game-best-score": "Best Score: "
     },
     "tr": {
         "title": "Kişisel Web Sitesi",
         "nav-brand": "Merhabalar Hoşgeldiniz 🌍",
         "nav-about": "Hakkımda",
-        "nav-projects": "Projeler",
         "nav-contact": "İletişim",
         "lang-text": "Dil",
         "about-title": "Hakkımda",
@@ -62,7 +68,15 @@ const translations = {
         "timeline-title-5": "2022",
         "timeline-text-5": "Back-end yazılım geliştirici olarak kariyerime başladım (Java - Python)",
         "timeline-title-6": "2025 - Gelecek Hedeflerim",
-        "timeline-text-6": "Yeniliklere odaklanarak, teknolojiyi yakından takip ederek ve yapay zeka ile geleceğe yelken açıyorum."
+        "timeline-text-6": "Yeniliklere odaklanarak, teknolojiyi yakından takip ederek ve yapay zeka ile geleceğe yelken açıyorum.",
+        "game-title": "Reflekslerinizi Test Edin!",
+        "game-desc": "Renk değiştiğinde hemen tıklayın!",
+        "game-start": "Oyunu Başlat",
+        "game-wait": "Renk değişmesini bekleyin...",
+        "game-click": "HEMEN TIKLAYIN!",
+        "game-result": "Tepki süreniz: ",
+        "game-restart": "Tekrar oynamak için Başlat'a tıklayın!",
+        "game-best-score": "En İyi Skor: "
     }
 };
 
@@ -158,5 +172,70 @@ document.querySelectorAll(".timeline-item").forEach(item => {
         document.querySelectorAll(".timeline-item").forEach(el => el.classList.remove("active"));
 
         this.classList.add("active");
+    });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    let gameBox = document.getElementById("game-box");
+    let gameText = document.getElementById("game-text");
+    let startButton = document.getElementById("start-game");
+    let reactionTimeDisplay = document.getElementById("reaction-time");
+    let bestScoreDisplay = document.getElementById("best-score");
+
+    let startTime, timeout, countdownInterval;
+    let gameActive = false; // Oyunun başlatılıp başlatılmadığını takip etmek için
+
+    // En iyi skoru localStorage'dan al
+    let bestScore = localStorage.getItem("bestScore");
+    if (bestScore) {
+        bestScoreDisplay.innerText = `Best Score: ${bestScore} ms`;
+    }
+
+    // Oyunu Başlat
+    startButton.addEventListener("click", function () {
+        if (gameActive) return; // Eğer oyun zaten başladıysa tekrar başlamasın
+
+        gameActive = true;
+        gameBox.style.backgroundColor = "red"; // Kutu başlangıçta kırmızıya dönüyor
+        gameText.innerText = "Starting in 3..."; // İlk geri sayımı gösteriyoruz
+        reactionTimeDisplay.innerText = ""; // Sonuçları temizle
+
+        let countdown = 3;
+        countdownInterval = setInterval(() => {
+            countdown--;
+            if (countdown > 0) {
+                gameText.innerText = `Starting in ${countdown}...`;
+            } else {
+                clearInterval(countdownInterval);
+                gameText.innerText = "Wait for color change...";
+
+                let randomDelay = Math.floor(Math.random() * 3000) + 2000; // 2-5 saniye rastgele bekleme süresi
+
+                timeout = setTimeout(() => {
+                    gameBox.style.backgroundColor = "green";
+                    gameText.innerText = "CLICK NOW!";
+                    startTime = new Date().getTime();
+                }, randomDelay);
+            }
+        }, 1000);
+    });
+
+    // Refleks Süresini Ölçme ve En İyi Skoru Güncelleme
+    gameBox.addEventListener("click", function () {
+        if (gameBox.style.backgroundColor === "green") {
+            let reactionTime = new Date().getTime() - startTime;
+            reactionTimeDisplay.innerText = `Your reaction time: ${reactionTime} ms`;
+            gameBox.style.backgroundColor = "red";
+            gameText.innerText = "Click Start to play again!";
+            gameActive = false; // Oyun tamamlandı
+
+            // En iyi skoru güncelle
+            if (!bestScore || reactionTime < bestScore) {
+                bestScore = reactionTime;
+                localStorage.setItem("bestScore", bestScore);
+                bestScoreDisplay.innerText = `Best Score: ${bestScore} ms`;
+            }
+        }
     });
 });

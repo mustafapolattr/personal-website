@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="#about" data-lang="nav-about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects" data-lang="nav-projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reflex-game" data-lang="nav-game">Reflex Game</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact" data-lang="nav-contact">Contact</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" role="button" data-bs-toggle="dropdown">
@@ -114,9 +114,18 @@
         </div>
     </div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="container mt-5 fade-in">
-        <h2 data-lang="nav-projects">Projects</h2>
+    <!-- Reflex Test Game Section -->
+    <section id="reflex-game" class="container mt-5 text-center fade-in">
+        <h2 data-lang="game-title">Test Your Reflexes!</h2>
+        <p data-lang="game-desc">Click as soon as the color changes!</p>
+
+        <div id="game-box">
+            <p id="game-text" data-lang="game-wait">Wait for the color change...</p>
+        </div>
+
+        <button id="start-game" class="btn btn-primary mt-3" data-lang="game-start">Start Game</button>
+        <p id="reaction-time"></p>
+        <p id="best-score" class="mt-2">Best Score: -- ms</p> <!-- En iyi skor buraya eklendi -->
     </section>
 
     <!-- Contact Form -->
