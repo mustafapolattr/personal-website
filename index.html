@@ -131,17 +131,19 @@
     <!-- Contact Form -->
     <section id="contact" class="container mt-5 fade-in">
         <h2 data-lang="contact-title">Contact Me</h2>
-        <form>
+        <form id="contact-form">
             <label for="name" class="form-label" data-lang="contact-name">Your Name:</label>
-            <input type="text" id="name" class="form-control" placeholder="" data-placeholder="contact-placeholder-name">
-    
+            <input type="text" id="name" class="form-control" placeholder="" data-placeholder="contact-placeholder-name" required>
+            
             <label for="email" class="form-label" data-lang="contact-email">Your Email:</label>
-            <input type="email" id="email" class="form-control" placeholder="" data-placeholder="contact-placeholder-email">
-    
+            <input type="email" id="email" class="form-control" placeholder="" data-placeholder="contact-placeholder-email" required>
+            
             <label for="message" class="form-label" data-lang="contact-message">Your Message:</label>
-            <textarea id="message" class="form-control" placeholder="" data-placeholder="contact-placeholder-message"></textarea>
-    
+            <textarea id="message" class="form-control" placeholder="" data-placeholder="contact-placeholder-message" required></textarea>
+            
             <button type="submit" class="btn btn-primary mt-3" data-lang="contact-button">Send</button>
+            
+            <p id="form-message" class="mt-2"></p> <!-- Başarı veya hata mesajı için alan -->
         </form>
     </section>
 

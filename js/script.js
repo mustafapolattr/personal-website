@@ -17,7 +17,9 @@ const translations = {
         "contact-button": "Send",
         "contact-placeholder-name": "Enter your name",
         "contact-placeholder-email": "Enter your email",
-        "contact-placeholder-message": "Write your message",
+        "contact-placeholder-message": "Write your message...",
+        "form-success": "Message sent successfully!",
+        "form-error": "Error sending message. Try again later.",
         "timeline-title-1": "2018 - Started Programming",
         "timeline-text-1": "Bachelor's Degree in Electronics and Communication Engineering and my first encounter with programming using C",
         "timeline-title-2": "2019 - 2020",
@@ -57,6 +59,8 @@ const translations = {
         "contact-placeholder-name": "Adınızı girin",
         "contact-placeholder-email": "E-posta adresinizi girin",
         "contact-placeholder-message": "Mesajınızı yazın...",
+        "form-success": "Mesaj başarıyla gönderildi!",
+        "form-error": "Mesaj gönderilirken hata oluştu. Lütfen tekrar deneyin.",
         "timeline-title-1": "2018 - Programlamaya Başladım",
         "timeline-text-1": "Elektrik ve Haberleşme Mühendisliği lisans eğitimim ve C dili ile programlamayla ilk tanışmam",
         "timeline-title-2": "2019 - 2020",
@@ -101,16 +105,51 @@ function changeLanguage(lang) {
     localStorage.setItem("selectedLanguage", lang);
 }
 
-// Load saved language preference
 document.addEventListener("DOMContentLoaded", () => {
-    const savedLanguage = localStorage.getItem("selectedLanguage") || "en"; // Default English
-    changeLanguage(savedLanguage);
+    let contactForm = document.getElementById("contact-form");
+    let formMessage = document.getElementById("form-message");
 
-    // Apply dark mode if saved
-    if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-        document.getElementById("dark-mode-toggle").innerText = "☀️ Light Mode";
-    }
+    contactForm.addEventListener("submit", async function (event) {
+        event.preventDefault(); // Sayfanın yenilenmesini önler
+
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let message = document.getElementById("message").value.trim();
+
+        // Basit form doğrulama
+        if (!name || !email || !message) {
+            formMessage.innerText = "Please fill out all fields.";
+            formMessage.style.color = "red";
+            return;
+        }
+
+        formMessage.innerText = "Sending...";
+        formMessage.style.color = "blue";
+
+        try {
+            let response = await fetch("https://formspree.io/f/xdkeorbd", { 
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"  // CORS hatasını önlemek için
+                },
+                body: JSON.stringify({ name, email, message })
+            });
+
+            if (response.ok) {
+                formMessage.innerText = "Message sent successfully!";
+                formMessage.style.color = "green";
+                contactForm.reset(); // Formu temizle
+            } else {
+                let errorData = await response.json(); // Hata detaylarını al
+                throw new Error(errorData.error || "Failed to send message.");
+            }
+        } catch (error) {
+            console.error("Form submission error:", error); // Konsolda detaylı hata göster
+            formMessage.innerText = "Error sending message. Please check your Form ID or try again later.";
+            formMessage.style.color = "red";
+        }
+    });
 });
 
 // Function to change language dynamically
