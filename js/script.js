@@ -18,7 +18,19 @@ const translations = {
         "contact-button": "Send",
         "contact-placeholder-name": "Enter your name",
         "contact-placeholder-email": "Enter your email",
-        "contact-placeholder-message": "Write your message"
+        "contact-placeholder-message": "Write your message",
+        "timeline-title-1": "2018 - Started Programming",
+        "timeline-text-1": "Bachelor's Degree in Electronics and Communication Engineering and my first encounter with programming using C",
+        "timeline-title-2": "2019 - 2020",
+        "timeline-text-2": "In my undergraduate education, I took the subject of software to a higher level with Java and Python",
+        "timeline-title-3": "2021",
+        "timeline-text-3": "Introduction to embedded systems using Raspberry Pi and Python.",
+        "timeline-title-4": "2021 - 2022",
+        "timeline-text-4": "To delve deeper into software using C and Python in my internships",
+        "timeline-title-5": "2022",
+        "timeline-text-5": "Starting your career as a back-end software developer (Java - Python)",
+        "timeline-title-6": "2025 - Future Goals",
+        "timeline-text-6": "Focusing on innovation, following technology closely and sailing to future horizons with artificial intelligence."
     },
     "tr": {
         "title": "Kişisel Web Sitesi",
@@ -38,7 +50,19 @@ const translations = {
         "contact-button": "Gönder",
         "contact-placeholder-name": "Adınızı girin",
         "contact-placeholder-email": "E-posta adresinizi girin",
-        "contact-placeholder-message": "Mesajınızı yazın..."
+        "contact-placeholder-message": "Mesajınızı yazın...",
+        "timeline-title-1": "2018 - Programlamaya Başladım",
+        "timeline-text-1": "Elektrik ve Haberleşme Mühendisliği lisans eğitimim ve C dili ile programlamayla ilk tanışmam",
+        "timeline-title-2": "2019 - 2020",
+        "timeline-text-2": "Lisans eğitimimde yazılım konusunu Java ve Python ile daha ileri seviyeye taşıdım",
+        "timeline-title-3": "2021",
+        "timeline-text-3": "Raspberry Pi ve Python kullanarak gömülü sistemlere giriş yaptım.",
+        "timeline-title-4": "2021 - 2022",
+        "timeline-text-4": "Stajlarımda C ve Python kullanarak yazılım alanında daha derinlemesine çalıştım",
+        "timeline-title-5": "2022",
+        "timeline-text-5": "Back-end yazılım geliştirici olarak kariyerime başladım (Java - Python)",
+        "timeline-title-6": "2025 - Gelecek Hedeflerim",
+        "timeline-text-6": "Yeniliklere odaklanarak, teknolojiyi yakından takip ederek ve yapay zeka ile geleceğe yelken açıyorum."
     }
 };
 
@@ -128,3 +152,11 @@ function revealOnScroll() {
 
 document.addEventListener("DOMContentLoaded", revealOnScroll);
 window.addEventListener("scroll", revealOnScroll);
+
+document.querySelectorAll(".timeline-item").forEach(item => {
+    item.addEventListener("click", function () {
+        document.querySelectorAll(".timeline-item").forEach(el => el.classList.remove("active"));
+
+        this.classList.add("active");
+    });
+});

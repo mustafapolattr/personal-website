@@ -190,3 +190,82 @@ input, textarea {
 .btn {
     transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
+
+
+/* Timeline Container */
+.timeline-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    position: relative;
+}
+
+/* Timeline Line */
+.timeline-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #007bff, #6610f2);
+    transform: translateX(-50%);
+}
+
+/* Timeline Item */
+.timeline-item {
+    position: relative;
+    width: 45%;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+/* Left & Right Positioning */
+.timeline-item.left {
+    text-align: right;
+    left: 0;
+}
+
+.timeline-item.right {
+    text-align: left;
+    left: 55%;
+}
+
+/* Timeline Icons */
+.timeline-icon {
+    display: none;
+    font-size: 30px;
+    transition: all 0.5s ease-in-out;
+}
+
+/* Show icon on click */
+.timeline-item.active .timeline-icon {
+    display: inline-block;
+    animation: pop-in 0.5s ease-in-out;
+}
+
+/* Pop-in animation */
+@keyframes pop-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Dark Mode Styling */
+.dark-mode .timeline-item {
+    background: #1e1e1e;
+    color: white;
+}
+
+.dark-mode .timeline-line {
+    background: linear-gradient(to bottom, #ffcc00, #ff5722);
+}
