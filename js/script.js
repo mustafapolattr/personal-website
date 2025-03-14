@@ -107,52 +107,40 @@ function changeLanguage(lang) {
     localStorage.setItem("selectedLanguage", lang);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    let contactForm = document.getElementById("contact-form");
-    let formMessage = document.getElementById("form-message");
+$(document).ready(function () {
+    $("#contact-form").submit(function (event) {
+        event.preventDefault();
 
-    contactForm.addEventListener("submit", async function (event) {
-        event.preventDefault(); // Sayfanın yenilenmesini önler
+        let name = $("#name").val().trim();
+        let email = $("#email").val().trim();
+        let message = $("#message").val().trim();
+        let formMessage = $("#form-message");
 
-        let name = document.getElementById("name").value.trim();
-        let email = document.getElementById("email").value.trim();
-        let message = document.getElementById("message").value.trim();
-
-        // Basit form doğrulama
+        // Basic form validation
         if (!name || !email || !message) {
-            formMessage.innerText = "Please fill out all fields.";
-            formMessage.style.color = "red";
+            formMessage.text("Please fill out all fields.").css("color", "red");
             return;
         }
 
-        formMessage.innerText = "Sending...";
-        formMessage.style.color = "blue";
+        formMessage.text("Sending...").css("color", "blue");
 
-        try {
-            let response = await fetch("https://formspree.io/f/xdkeorbd", { 
-                method: "POST",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"  // CORS hatasını önlemek için
-                },
-                body: JSON.stringify({ name, email, message })
-            });
-
-            if (response.ok) {
-                formMessage.innerText = "Message sent successfully!";
-                formMessage.style.color = "green";
-                contactForm.reset(); // Formu temizle
-            } else {
-                let errorData = await response.json(); // Hata detaylarını al
-                throw new Error(errorData.error || "Failed to send message.");
+        $.ajax({
+            url: "https://formspree.io/f/xdkeorbd",
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify({ name: name, email: email, message: message }),
+            success: function (response) {
+                formMessage.text("Message sent successfully!").css("color", "green");
+                $("#contact-form")[0].reset(); // Formu temizle
+            },
+            error: function (xhr) {
+                console.error("Form submission error:", xhr);
+                formMessage.text("Error sending message. Please check your Form ID or try again later.").css("color", "red");
             }
-        } catch (error) {
-            console.error("Form submission error:", error); // Konsolda detaylı hata göster
-            formMessage.innerText = "Error sending message. Please check your Form ID or try again later.";
-            formMessage.style.color = "red";
-        }
+        });
     });
 });
+
 
 // Function to change language dynamically
 function changeLanguage(lang) {
