@@ -18,7 +18,7 @@ This is my personal portfolio website showcasing my skills, projects, and a fun 
 - **CSS3 (Bootstrap 5)** – Styling and responsive design  
 - **JavaScript (Vanilla JS, jQuery, AJAX)** – Dynamic interactions  
 - **Formspree API** – Contact form functionality  
-- **LocalStorage** – Saves user preferences (Dark Mode, Best Score)  
+- **LocalStorage** – Saves user preferences (Dark - Light Mode, Best Score)  
 
 ## 🔧 Installation & Usage
 1. **Clone this repository**
